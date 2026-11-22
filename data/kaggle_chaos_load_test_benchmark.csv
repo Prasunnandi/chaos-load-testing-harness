@@ -1,0 +1,7 @@
+scenario_id,test_name,target_service,virtual_users,target_rps,chaos_fault_injected,p50_latency_ms,p90_latency_ms,p99_latency_ms,error_rate_pct,cpu_util_pct,db_pool_util_pct,sla_verdict
+SCN-LOAD-01,Peak_Checkout_Spike,Payments API,5000,12500,None (Baseline),42.5,95.0,185.0,0.01,64.2,48.0,PASSED
+SCN-LOAD-02,Network_Jitter_Injection,Auth / Token Service,2500,6200,120ms Packet Delay (10% drop),148.0,280.0,740.0,0.45,58.0,35.0,PASSED_WITH_WARNING
+SCN-LOAD-03,DB_Connection_Exhaustion,Order Placement API,4000,9800,PostgreSQL Pool Capped at 15 conns,85.0,410.0,1950.0,4.82,88.5,100.0,FAILED_SLA_BREACH
+SCN-LOAD-04,Upstream_Catalog_503_Chaos,Product Catalog API,6000,15000,20% Synthetic 503 Outage,38.0,110.0,210.0,20.10,71.0,52.0,CIRCUIT_BREAKER_TRIGGERED
+SCN-LOAD-05,Endurance_Soak_Test_4H,Cart Microservice,3000,7500,Slow Memory Leak Injection,55.0,120.0,240.0,0.02,82.4,60.0,PASSED
+SCN-LOAD-06,Cold_Start_Burst_Stress,Search Vector Index,1500,3800,Redis Cache Purge FlushAll,190.0,620.0,1420.0,1.25,94.0,78.0,DEGRADED_FAILOVER
